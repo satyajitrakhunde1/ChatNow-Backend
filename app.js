@@ -4,6 +4,9 @@ let app=express()
 
 app.use("/user",userRoute)
 
+app.get("/",(req,res)=>{
+    res.send("home")
+})
 
 console.log("hello")
 
