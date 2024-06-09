@@ -1,17 +1,28 @@
-import express from 'express'
-import userRoute from "./routes/user.js"
-let app=express()
+import express from 'express';
+import userRoute from './routes/user.js';
+import dotenv from 'dotenv';
+import { connectDB } from './utils/features.js';
 
-app.use("/user",userRoute)
+dotenv.config({
+    path: './.env' // Correct path to your .env file
+});
 
-app.get("/",(req,res)=>{
-    res.send("home")
-})
+const MONGO_URI = process.env.MONGO_URI;
+const PORT = process.env.PORT || 3000;
 
-console.log("hello")
+connectDB(MONGO_URI); // Connect to MongoDB
 
-app.listen(3000,()=>{
-    console.log("app is listening")
-})
+let app = express();
 
+app.use(express.json());
+app.use('/user', userRoute);
 
+app.get('/', (req, res) => {
+    res.send('home');
+});
+
+console.log('hello');
+
+app.listen(PORT, () => {
+    console.log(`App is listening on ${PORT}`);
+});

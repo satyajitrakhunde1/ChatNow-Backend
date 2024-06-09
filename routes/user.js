@@ -1,8 +1,10 @@
-import express from 'express'
-import { login } from '../controllers/user.js';
+import express from 'express';
+import { login, newUser } from '../controllers/user.js';
+import { multerUpload } from '../middlewares/multer.js';
 
-const app =express.Router();
+const router = express.Router();
 
-app.get("/login",login)
+router.post('/new',multerUpload.single("avatar"),  newUser);
+router.post('/login', login);
 
-export default app;
+export default router;
