@@ -20,7 +20,7 @@ console.log(req.body)
             avatar 
         });
 
-        res.status(201).json({ message: "user created successfully", user });
+        res.status(201).json({ message: "user created successfully" });
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
